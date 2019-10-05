@@ -1,5 +1,6 @@
 import React from "react";
-import { AsyncStorage, Button, View } from "react-native";
+import { AsyncStorage, View } from "react-native";
+import { Button } from "../components/Button";
 
 export default function SettingsScreen(props) {
   _signOutAsync = async () => {
@@ -9,7 +10,7 @@ export default function SettingsScreen(props) {
 
   return (
     <View>
-      <Button title="Sign Out" onPress={this._signOutAsync} />
+      <Button text="Sign Out" onTap={this._signOutAsync} />
     </View>
   );
 }
