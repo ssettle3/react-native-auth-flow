@@ -1,14 +1,19 @@
-import React from 'react';
-import { ExpoConfigView } from '@expo/samples';
+import React from "react";
+import { AsyncStorage, Button, View } from "react-native";
 
-export default function SettingsScreen() {
-  /**
-   * Go ahead and delete ExpoConfigView and replace it with your content;
-   * we just wanted to give you a quick view of your config.
-   */
-  return <ExpoConfigView />;
+export default function SettingsScreen(props) {
+  _signOutAsync = async () => {
+    await AsyncStorage.clear();
+    props.navigation.navigate("Auth");
+  };
+
+  return (
+    <View>
+      <Button title="Sign Out" onPress={this._signOutAsync} />
+    </View>
+  );
 }
 
 SettingsScreen.navigationOptions = {
-  title: 'app.json',
+  title: "Settings"
 };
