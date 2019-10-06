@@ -8,15 +8,23 @@ import {
 import MainTabNavigator from "./MainTabNavigator";
 import AuthLoadingScreen from "../screens/AuthLoading";
 import SignInScreen from "../screens/SignInScreen";
+import SignUpScreen from "../screens/SignUpScreen";
 
-const AuthStack = createStackNavigator({ SignIn: SignInScreen });
+const SignInStack = createStackNavigator({
+  SignIn: SignInScreen
+});
+
+const SignUpStack = createStackNavigator({
+  SignUp: SignUpScreen
+});
 
 export default createAppContainer(
   createSwitchNavigator(
     {
       AuthLoading: AuthLoadingScreen,
       Main: MainTabNavigator,
-      Auth: AuthStack
+      SignIn: SignInStack,
+      SignUp: SignUpStack
     },
     { initialRouteName: "AuthLoading" }
   )

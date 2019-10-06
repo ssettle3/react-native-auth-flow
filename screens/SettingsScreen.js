@@ -5,7 +5,7 @@ import { Button } from "../components/Button";
 export default function SettingsScreen(props) {
   _signOutAsync = async () => {
     await AsyncStorage.clear();
-    props.navigation.navigate("Auth");
+    props.navigation.navigate("SignIn");
   };
 
   return (
