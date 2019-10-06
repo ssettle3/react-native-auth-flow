@@ -1,12 +1,7 @@
 import React from "react";
-import {
-  AsyncStorage,
-  View,
-  TextInput,
-  Text,
-  TouchableOpacity
-} from "react-native";
+import { AsyncStorage, View, Text, TouchableOpacity } from "react-native";
 import { Button } from "../components/Button";
+import Input from "../components/Input";
 
 export default class SignUpScreen extends React.Component {
   state = {
@@ -63,43 +58,16 @@ export default class SignUpScreen extends React.Component {
         <View style={{ alignItems: "center", marginBottom: 50 }}>
           <Text style={{ fontSize: 40 }}>App Name</Text>
         </View>
-        <TextInput
-          style={{
-            fontSize: 20,
-            borderTopWidth: 1,
-            borderBottomWidth: 1,
-            borderColor: "lightgray",
-            padding: 10,
-            marginTop: 5,
-            height: 60
-          }}
+        <Input
           onChangeText={text => this.updateValue(text, "email")}
           placeholder="Email Address"
         />
-        <TextInput
-          style={{
-            fontSize: 20,
-            borderTopWidth: 1,
-            borderBottomWidth: 1,
-            borderColor: "lightgray",
-            padding: 10,
-            marginTop: 5,
-            height: 60
-          }}
+        <Input
           onChangeText={text => this.updateValue(text, "password")}
           placeholder="Password"
           secureTextEntry={true}
         />
-        <TextInput
-          style={{
-            fontSize: 20,
-            borderTopWidth: 1,
-            borderBottomWidth: 1,
-            borderColor: "lightgray",
-            padding: 10,
-            marginTop: 5,
-            height: 60
-          }}
+        <Input
           onChangeText={text => this.updateValue(text, "confirmPassword")}
           placeholder="Confirm Password"
           secureTextEntry={true}
