@@ -1,11 +1,13 @@
 import React from "react";
+import axios from "axios";
 import { AsyncStorage, View, Text, TouchableOpacity } from "react-native";
+
 import { Button } from "../components/Button";
 import Input from "../components/Input";
 
 export default class SignInScreen extends React.Component {
   state = {
-    email: "",
+    username: "",
     password: ""
   };
 
@@ -17,7 +19,7 @@ export default class SignInScreen extends React.Component {
     this.setState({ [key]: value });
   };
 
-  isDisabled = () => !this.state.email || !this.state.password;
+  isDisabled = () => !this.state.username || !this.state.password;
 
   render() {
     return (
@@ -29,17 +31,24 @@ export default class SignInScreen extends React.Component {
         }}
       >
         <View style={{ alignItems: "center", marginBottom: 50 }}>
-          <Text style={{ fontSize: 40 }}>App Name</Text>
+          <Text style={{ fontSize: 40 }}>Op</Text>
         </View>
+
         <Input
-          onChangeText={text => this.updateValue(text, "email")}
-          placeholder="Email Address"
+          onChangeText={text => this.updateValue(text, "username")}
+          placeholder="Username"
         />
+
         <Input
           onChangeText={text => this.updateValue(text, "password")}
           placeholder="Password"
           secureTextEntry={true}
         />
+
+        <View style={{ marginTop: 10, alignItems: "center" }}>
+          <Text style={{ color: "red" }}>{this.state.error}</Text>
+        </View>
+
         <View style={{ marginTop: 100 }}>
           <Button
             text="Sign In"
@@ -66,9 +75,18 @@ export default class SignInScreen extends React.Component {
     this.props.navigation.navigate("SignUp");
   };
 
-  _signInAsync = async e => {
-    // Make your request your DB here for ensuring user exists
-    await AsyncStorage.setItem("userToken", "abc");
-    this.props.navigation.navigate("Main");
+  _signInAsync = e => {
+    axios
+      .post("http://localhost:3000/auth/login", {
+        username: this.state.username,
+        password: this.state.password
+      })
+      .then(response => {
+        AsyncStorage.setItem("userToken", response.data.token);
+        this.props.navigation.navigate("Main");
+      })
+      .catch(() => {
+        this.setState({ error: "Invalid Username/Password" });
+      });
   };
 }

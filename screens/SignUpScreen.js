@@ -1,5 +1,7 @@
 import React from "react";
+import axios from "axios";
 import { AsyncStorage, View, Text, TouchableOpacity } from "react-native";
+
 import { Button } from "../components/Button";
 import Input from "../components/Input";
 
@@ -56,7 +58,7 @@ export default class SignUpScreen extends React.Component {
         }}
       >
         <View style={{ alignItems: "center", marginBottom: 50 }}>
-          <Text style={{ fontSize: 40 }}>App Name</Text>
+          <Text style={{ fontSize: 40 }}>Op</Text>
         </View>
         <Input
           onChangeText={text => this.updateValue(text, "email")}
@@ -101,9 +103,15 @@ export default class SignUpScreen extends React.Component {
     this.props.navigation.navigate("SignIn");
   };
 
-  _signUpAsync = async e => {
-    // Make your request your DB here for ensuring user exists
-    await AsyncStorage.setItem("userToken", "abc");
-    this.props.navigation.navigate("Main");
+  _signUpAsync = e => {
+    axios
+      .post("http://localhost:3000/auth/sign_up")
+      .then(response => {
+        AsyncStorage.setItem("userToken", response.token);
+        this.props.navigation.navigate("Main");
+      })
+      .catch(e => {
+        this.setState({ error: e.error || "fucked" });
+      });
   };
 }
