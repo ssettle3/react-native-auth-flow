@@ -20,7 +20,7 @@ const buttonStyle = StyleSheet.create({
   }
 });
 
-export const Button = props => (
+export const CustomButton = props => (
   <TouchableOpacity
     disabled={props.disabled || false}
     onPress={props.onTap}

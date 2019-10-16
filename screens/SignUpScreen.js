@@ -2,12 +2,12 @@ import React from "react";
 import axios from "axios";
 import { AsyncStorage, View, Text, TouchableOpacity } from "react-native";
 
-import { Button } from "../components/Button";
+import { CustomButton } from "../components/Button";
 import Input from "../components/Input";
 
 export default class SignUpScreen extends React.Component {
   state = {
-    email: "",
+    username: "",
     password: "",
     confirmPassword: "",
     error: ""
@@ -39,7 +39,7 @@ export default class SignUpScreen extends React.Component {
 
   isDisabled = () => {
     return (
-      !this.state.email ||
+      !this.state.username ||
       !this.state.password ||
       !this.state.confirmPassword ||
       (this.state.password &&
@@ -61,8 +61,8 @@ export default class SignUpScreen extends React.Component {
           <Text style={{ fontSize: 40 }}>Op</Text>
         </View>
         <Input
-          onChangeText={text => this.updateValue(text, "email")}
-          placeholder="Email Address"
+          onChangeText={text => this.updateValue(text, "username")}
+          placeholder="Username"
         />
         <Input
           onChangeText={text => this.updateValue(text, "password")}
@@ -78,7 +78,7 @@ export default class SignUpScreen extends React.Component {
           <Text style={{ color: "red" }}>{this.state.error}</Text>
         </View>
         <View style={{ marginTop: 100 }}>
-          <Button
+          <CustomButton
             text="Sign Up"
             onTap={this._signUpAsync}
             disabled={this.isDisabled()}
@@ -105,9 +105,14 @@ export default class SignUpScreen extends React.Component {
 
   _signUpAsync = e => {
     axios
-      .post("http://localhost:3000/auth/sign_up")
+      .post("http://localhost:3000/auth/sign_up", {
+        username: this.state.username,
+        password: this.state.password,
+        password_confirmation: this.state.confirmPassword
+      })
       .then(response => {
-        AsyncStorage.setItem("userToken", response.token);
+        AsyncStorage.setItem("currentUser", JSON.stringify(response.data));
+        AsyncStorage.setItem("userToken", response.data.token);
         this.props.navigation.navigate("Main");
       })
       .catch(e => {

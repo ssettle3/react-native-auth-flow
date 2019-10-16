@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { AsyncStorage, View, Text, TouchableOpacity } from "react-native";
 
-import { Button } from "../components/Button";
+import { CustomButton } from "../components/Button";
 import Input from "../components/Input";
 
 export default class SignInScreen extends React.Component {
@@ -50,7 +50,7 @@ export default class SignInScreen extends React.Component {
         </View>
 
         <View style={{ marginTop: 100 }}>
-          <Button
+          <CustomButton
             text="Sign In"
             onTap={this._signInAsync}
             disabled={this.isDisabled()}
@@ -82,6 +82,7 @@ export default class SignInScreen extends React.Component {
         password: this.state.password
       })
       .then(response => {
+        AsyncStorage.setItem("currentUser", JSON.stringify(response.data));
         AsyncStorage.setItem("userToken", response.data.token);
         this.props.navigation.navigate("Main");
       })
