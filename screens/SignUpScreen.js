@@ -116,7 +116,7 @@ export default class SignUpScreen extends React.Component {
         this.props.navigation.navigate("Main");
       })
       .catch(e => {
-        this.setState({ error: e.error || "fucked" });
+        this.setState({ error: e.error || "error" });
       });
   };
 }
