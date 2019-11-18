@@ -8,7 +8,9 @@ import {
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
 import WorkoutsScreen from "../screens/WorkoutsScreen";
+import NewWorkoutScreen from "../screens/NewWorkoutScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import WorkoutScreen from "../screens/WorkoutScreen";
 
 const config = Platform.select({
   web: { headerMode: "screen" },
@@ -36,13 +38,15 @@ HomeStack.path = "";
 
 const WorkoutsStack = createStackNavigator(
   {
-    Workouts: WorkoutsScreen
+    Workouts: WorkoutsScreen,
+    NewWorkout: NewWorkoutScreen,
+    Workout: WorkoutScreen
   },
   config
 );
 
 WorkoutsStack.navigationOptions = {
-  tabBarLabel: "Workouts",
+  tabBarLabel: "My Workouts",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}

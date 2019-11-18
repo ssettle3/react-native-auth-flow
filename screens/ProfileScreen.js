@@ -13,8 +13,8 @@ const ProfilePictureWrapper = styled.View`
 `;
 
 const ProfilePicture = styled.View`
-  height: 150px;
-  width: 150px;
+  height: 70px;
+  width: 70px;
   justify-content: center;
   align-items: center;
   background-color: #1f96f3;
@@ -65,7 +65,7 @@ export default function ProfileScreen(props) {
         <View>
           <ProfilePictureWrapper>
             <ProfilePicture>
-              <Text style={{ fontSize: 70, color: "#fff" }}>SS</Text>
+              <Text style={{ fontSize: 20, color: "#fff" }}>SS</Text>
             </ProfilePicture>
           </ProfilePictureWrapper>
 
@@ -98,7 +98,6 @@ export default function ProfileScreen(props) {
           </Details>
 
           <Actions>
-            <Text>EXTRA</Text>
             <CustomButton text="Sign Out" onTap={this._signOutAsync} />
           </Actions>
         </View>
