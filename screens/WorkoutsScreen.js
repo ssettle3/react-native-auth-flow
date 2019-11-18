@@ -1,13 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import axios from "axios";
-import {
-  ScrollView,
-  View,
-  Text,
-  AsyncStorage,
-  TouchableOpacity
-} from "react-native";
+import { ScrollView, View, Text, TouchableOpacity } from "react-native";
 
 import { List, SwipeAction } from "@ant-design/react-native";
 
